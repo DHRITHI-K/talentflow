@@ -4,9 +4,10 @@ import './index.css';
 import App from './App.jsx';
 import { makeServer } from './api/server';
 
-// Start mock server in development
-if (import.meta.env.DEV) {
+// Start MirageJS in all environments (including production on Vercel)
+if (typeof window !== "undefined" && !window.serverStarted) {
   makeServer();
+  window.serverStarted = true;
 }
 
 createRoot(document.getElementById('root')).render(
